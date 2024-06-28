@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "author": "The Bin - Hack Club",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-pi-pico-w", "id": "pico", "top": -32.05, "left": 13.15, "attrs": {} },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "wokwi-ntc-temperature-sensor-0",
+      "top": -141.4,
+      "left": 153,
+      "attrs": {}
+    },
+    {
+      "type": "board-ds18b20",
+      "id": "board-ds18b20-0",
+      "top": 66.07,
+      "left": -53.52,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "board-ssd1306-0",
+      "top": 60.74,
+      "left": 134.63,
+      "attrs": { "i2c-address": "0x3D" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -51.6,
+      "left": -53.8,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 147.95,
+      "left": -57.6,
+      "attrs": { "value": "4700" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -118.6,
+      "left": 19.2,
+      "attrs": { "color": "red" }
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "led1:A", "pico:GP4", "green", [ "v0" ] ],
+    [ "board-ds18b20-0:GND", "pico:GND.1", "black", [ "v0" ] ],
+    [ "led1:C", "pico:GND.1", "black", [ "v0" ] ],
+    [ "pico:3V3", "board-ds18b20-0:VCC", "red", [ "h0" ] ],
+    [ "board-ds18b20-0:VCC", "r1:2", "red", [ "v0" ] ],
+    [ "board-ds18b20-0:DQ", "r1:1", "green", [ "v0" ] ],
+    [ "board-ds18b20-0:DQ", "pico:GP2", "green", [ "v0" ] ],
+    [ "board-ssd1306-0:VCC", "pico:3V3", "red", [ "v0" ] ],
+    [ "board-ssd1306-0:GND", "pico:GND.8", "black", [ "v0" ] ],
+    [ "board-ssd1306-0:SCL", "pico:GP28", "green", [ "v0" ] ],
+    [ "board-ssd1306-0:SDA", "pico:GP27", "green", [ "v0" ] ],
+    [ "btn1:2.l", "pico:GP1", "green", [ "h0" ] ],
+    [ "btn1:1.r", "pico:VSYS", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
